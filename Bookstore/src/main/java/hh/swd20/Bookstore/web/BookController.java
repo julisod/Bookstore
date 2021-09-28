@@ -22,7 +22,7 @@ public class BookController {
 	@RequestMapping(value = "/booklist", method = RequestMethod.GET)
 	public String listBooks(Model model) {
 		List<Book> books = (List<Book>) repository.findAll();
-		model.addAttribute("books", books); //välitetään tyhjä kirjalista 
+		model.addAttribute("books", books); //välitetään kirjalista 
 		return "booklist";
 	}
 	
