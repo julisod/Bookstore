@@ -1,0 +1,17 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Add category</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+</head>
+<body>
+	<h1>Add category</h1>
+	<div>
+		<form th:object="${category}" th:action="@{savecategory}" action="#" method="post">
+		  	<label for="name">Name</label>
+			<input type="text" th:field="*{name}" />
+			<input type="submit" value="Save"></input>
+		</form>
+	</div>
+</body>
+</html>

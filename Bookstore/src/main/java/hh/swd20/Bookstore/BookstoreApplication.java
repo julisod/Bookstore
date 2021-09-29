@@ -31,6 +31,11 @@ public class BookstoreApplication {
 			Category category3 = new Category("nonfiction");
 			crepository.save(category3);
 			
+			log.info("fetch all categories");
+			for (Category category : crepository.findAll()) {
+				log.info(category.toString());
+			}
+			
 			log.info("we will add a couple of example books");
 			brepository.save(new Book("Utopia for Realists", "Ruther Bregman", 2014, 9781408893210L, 15.20, category3));
 			brepository.save(new Book("Atomic Habits", "James Clear", 2018, 9781847941831L, 23.40, category3));
