@@ -24,8 +24,7 @@
 			<input type="text" th:field="*{price}" required/>
 			<br><br>
 			<label for="categories">Category:</label>
-			  <select name="categories" >
-			  	<option selected disabled>Choose category...</option>	
+			  <select name="categories" th:field="*{category}" >	
 			    <option th:each = "category : ${categories}" 
 			    th:value = ${category.id} th:text = ${category.name}></option>
 			  </select>
