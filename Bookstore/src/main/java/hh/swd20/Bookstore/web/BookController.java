@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -54,13 +55,6 @@ public class BookController {
 		return "booklist";
 	}
 	
-	@RequestMapping(value = "/categorylist", method = RequestMethod.GET)
-	public String listCategories(Model model) {
-		//List<Category> categories = (List<Category>) crepository.findAll();
-		model.addAttribute("categories", crepository.findAll()); //välitetään kategorialista 
-		return "categorylist";
-	}
-	
 	@RequestMapping(value = "/add")
     public String addBook(Model model){
     	model.addAttribute("book", new Book());
@@ -68,15 +62,11 @@ public class BookController {
         return "addbook";
     } 
 	
-	@RequestMapping(value = "/addcategory")
-    public String addCategory(Model model){
-    	model.addAttribute("category", new Category());
-        return "addcategory";
-    } 
-	
+	@PreAuthorize("hasRole('ADMIN')")
 	@RequestMapping(value = "/edit/{id}", method = RequestMethod.GET)
     public String editBook(@PathVariable("id") Long bookId, Model model){
 		model.addAttribute("book", brepository.findById(bookId).get());
+		model.addAttribute("categories", crepository.findAll());
         return "editbook";
     }
 	
@@ -86,15 +76,15 @@ public class BookController {
         return "redirect:booklist";
     }  
 	
-	@RequestMapping(value = "/savecategory", method = RequestMethod.POST)
-    public String saveCategory(Category category){
-        crepository.save(category);
-        return "redirect:categorylist";
-    } 
-	
+	@PreAuthorize("hasRole('ADMIN')")
 	@RequestMapping(value = "/delete/{id}", method = RequestMethod.GET)
     public String deleteBook(@PathVariable("id") Long bookId, Model model) {
     	brepository.deleteById(bookId);
         return "redirect:../booklist";
     }   
+	
+	@RequestMapping(value="/login")
+	public String login() {
+		return "login";
+	}
 }
