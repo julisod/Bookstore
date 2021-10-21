@@ -15,7 +15,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import hh.swd20.Bookstore.domain.Book;
 import hh.swd20.Bookstore.domain.BookRepository;
-import hh.swd20.Bookstore.domain.Category;
 import hh.swd20.Bookstore.domain.CategoryRepository;
 
 @Controller
@@ -62,7 +61,7 @@ public class BookController {
         return "addbook";
     } 
 	
-	@PreAuthorize("hasRole('ADMIN')")
+	@PreAuthorize("hasAuthority('ADMIN')")
 	@RequestMapping(value = "/edit/{id}", method = RequestMethod.GET)
     public String editBook(@PathVariable("id") Long bookId, Model model){
 		model.addAttribute("book", brepository.findById(bookId).get());
