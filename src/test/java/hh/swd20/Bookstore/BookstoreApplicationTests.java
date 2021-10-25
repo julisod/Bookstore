@@ -22,7 +22,7 @@ class BookstoreApplicationTests {
 	private CategoryController categoryController;
 
 	@Test
-	void contextLoads() {
+	public void contextLoads() {
 		assertThat(bookController).isNotNull();
 		assertThat(categoryController).isNotNull();
 	}
